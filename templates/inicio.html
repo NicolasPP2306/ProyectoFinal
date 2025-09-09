@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+  Inicio
+{% endblock %}
+
+{% block contenido %}
+    <div class="encabezado">
+      <h1>Sistema Metro Medellín</h1>
+    </div>
+    <div class="encabezado2">
+      <h2>Bienvenido</h2>
+    </div>
+    {%if admin %}
+      <div class="cuerpo">
+        <div class="titulo-cuerpo">
+          <h3>Administrador</h3>
+        </div>
+        <div class="form">
+          <form method="POST" action="/">
+            <div>
+            <div class="input-label">Contraseña</div>
+              <input type="password" name="contrasenia" placeholder="Contraseña">
+            </div>
+            {% if error2%}
+              <h5> Contraseña Incorrecta . {{intentos}}/3 intentos </h5>
+            {% endif %}
+            <div>
+              <button type="submit" name="btn" value="ingresar">Ingresar</button>
+              <button type="submit" name="btn" value="volver">Volver</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    {% else %}
+      <div class="cuerpo">
+        <div class="titulo-cuerpo">
+          <h3>Inicio de Sesion</h3>
+        </div>
+        <div class="form">
+          <form method="POST" action="/">
+            <div>
+              <div class="input-label">Usuario</div>
+              <input type="text" name="usuario" placeholder="Usuario">
+            </div>
+            <br>
+            <div>
+            <div class="input-label">Contraseña</div>
+              <input type="password" name="contrasenia" placeholder="Contraseña">
+            </div>
+            {% if error1%}
+              <h5> Usuario no encontrado</h5>
+            {% elif error2 %}
+              <h5> Contraseña Incorrecta</h5>
+            {% endif %}
+            <div>
+              <button type="submit" name="btn" value="iniciar-sesion">Iniciar Sesion</button>
+              <button type="submit" name="btn" value="administrador">Administrador</button>
+            </div>
+          </form>
+        </div>
+        <div>
+          <p style="margin-top:15px; font-size: 14px;">No tienes cuenta? <a href="{{url_for('registro')}}">Registrarse</a> </p> 
+        </div>
+      </div>
+    {% endif %}  
+{% endblock %}

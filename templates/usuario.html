@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+  Usuario {{usuario}}
+{% endblock %}
+
+{% block contenido %}
+  <div class="encabezado">
+      <h1>Sistema Metro Medellín</h1>
+  </div>
+  <div class="encabezado2">
+      <h2>{{usuario | capitalize}} - {{perfil | capitalize}}</h2>
+  </div>
+  <div class="cuerpo">
+    <div class="titulo-cuerpo">
+      <h3>Precio: ${{precio}}</h3>
+    </div>
+    <div>
+      <form method="POST", action="/usuario_{{usuario}}">
+        <div style="margin-top: 20px;">
+          <div class="input-label">Cantidad</div>
+          <input type="text" name="cant_tickets" placeholder="Número de tickets">
+        </div>
+        {% if error1 %}
+          <h5>Digite un valor</h5>
+        {% endif %}
+        <div>
+          <button type="submit"name="btn" value="calcular">Calcular</button>
+          <button type="submit" name="btn" value="volver">Volver</button>
+        </div>
+      </form>
+    </div>
+    {% if cant_tickets %}
+      <div class="factura">
+        <div>
+          <strong>FACTURA</strong>
+        </div>
+        <br>
+        <div>
+          <div>Precio ...........${{precio}}</div>
+          <div>Cantidad ..............x{{cant_tickets}}</div>
+          <br>
+          <div>Total .............${{precio_total}}</div>
+        </div>
+        <div>
+          <form method="POST" action="/usuario_{{usuario}}">
+            <button type="submit" name="btn" value="pagar">Pagar</button>
+            <button type="submit" name="btn" value="cancelar">Cancelar</button>
+          </form>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+  Registro Usuarios
+{% endblock %}
+
+{% block contenido %}
+    <div class="encabezado">
+      <h1>Sistema Metro Medellín</h1>
+    </div>
+    <div class="encabezado2">
+      <h2>Nuevo Usuario</h2>
+    </div>
+    <div class="cuerpo">
+      <div class="titulo-cuerpo">
+        <h3>Registro</h3>
+      </div>
+      <div class="form">
+        {% if registrado %}
+          <form method="POST" action="/registro-usuario">
+            <h5>Usuario {{usuario}} creado con exito</h5>
+            <div>
+              <button type="submit" name="btn" value="iniciar-sesion">Inciar Sesion</button>
+            </div>
+          </form>
+        {% else %}
+          <form method="POST" action="/registro-usuario">
+            <div>
+              <div class="input-label">Usuario</div>
+              <input type="text" name="usuario" placeholder="Usuario">
+            </div>
+            <br>
+            <div>
+              <div class="input-label">Perfil</div>
+              <div>
+                <select name="perfiles">
+                  <option selected value="">-- seleccione una opción --</option>
+                  <option value="ocasional">Ocasional</option>
+                  <option value="frecuente">Frecuente</option>
+                  <option value="estudiante">Estudiante</option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div>
+            <div class="input-label">Contraseña</div>
+              <input type="password" name="contrasenia" placeholder="Contraseña">
+            </div>
+            {% if error1%}
+              <h5>Información incompleta</h5>
+            {% elif error2 %}
+              <h5>Usuario ya existe</h5>
+            {% endif %}
+            <div>
+              <button type="submit" name="btn" value="registrarse">Registrarse</button>
+              <button type="submit" name="btn" value="volver">Volver</button>
+            </div>
+          </form>
+        {% endif %}
+      </div>
+    </div>
+{% endblock %}

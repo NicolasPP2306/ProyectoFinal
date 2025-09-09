@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+  Pasarela de pago
+{% endblock %}
+
+{% block contenido %}
+  <div class="encabezado">
+      <h1>Sistema Metro Medellín</h1>
+  </div>
+  {% if pagado %}
+    <div class="encabezado2">
+        <h2>GRACIAS POR SU COMPRA</h2>
+    </div>
+    <div class="cuerpo">
+      <div class="titulo-cuerpo">
+        <h3>Devolviendo: ${{devuelta}}</h3>
+      </div>
+      <div>
+        <form method="POST", action="/portal-pago">
+          <div>
+            <button type="submit" name="btn" value="volver">Volver</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  {% else %}
+    <div class="encabezado2">
+        <h2>TOTAL A PAGAR: ${{precio_total}}</h2>
+    </div>
+    <div class="cuerpo">
+      <div class="titulo-cuerpo">
+        <h3>Ingresado: ${{pago}}</h3> 
+      </div>
+      <div>
+        <form method="POST", action="/portal-pago">
+          <div>
+            <button class="btn-moneda" type="submit"name="btn" value="500">$500</button>
+            <button class="btn-moneda" type="submit"name="btn" value="1000">$1000</button>
+            <button class="btn-moneda" type="submit"name="btn" value="2000">$2000</button>
+            <button class="btn-moneda" type="submit"name="btn" value="5000">$5000</button>
+          </div>
+          {% if error1 %}
+            <h5>Fondos Insuficientes</h5>
+          {% endif %} 
+          <div>
+            <button type="submit"name="btn" value="pagar">Pagar</button>
+            <button type="submit" name="btn" value="cancelar">cancelar</button>
+          </div>
+        </form>
+      </div> 
+    </div>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+  base de datos
+{% endblock %}
+
+{% block contenido %}
+    <div class="encabezado">
+      <h1>Sistema Metro Medellín</h1>
+    </div>
+    <div class="encabezado2">
+      <h2>Administrador</h2>
+    </div>
+      <div class="cuerpo">
+        <div class="titulo-cuerpo">
+          <h3>Base de Datos</h3>
+        </div>
+        <div class="form">
+          <form method="POST" action="/admin">
+            <div>
+              <button style="margin:0px; width: 180px; background-color: cadetblue;" type="submit" name="btn" value="usuarios">Usuarios</button>
+              <br>
+              <button style="width: 180px; background-color: cadetblue;" type="submit" name="btn" value="perfiles">Perfiles</button>
+              {% if buscar_usuarios %}
+                <div style="margin-top: 15px;">
+                  <div class="input-label">buscar usuarios</div>
+                  <select name="lista">
+                    <option selected value="">-- -- -- --</option>
+                    {% for usuario in usuarios %}
+                      <option value="{{usuario.usuario}}">{{usuario.usuario}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              {% elif buscar_perfiles %}  
+                <div style="margin-top: 15px;">
+                  <div class="input-label">buscar perfiles</div>
+                    <select name="lista">
+                      <option selected value="">Seleccione un perfil</option>
+                      {% for perfil in perfiles %}
+                        <option value="{{perfil.nombre}}">{{perfil.nombre}}</option>
+                      {% endfor %}
+                  </select>
+                </div>
+              {% endif %}  
+              <br>
+              <button type="submit" name="btn" value="buscar">Buscar</button>
+              <button type="submit" name="btn" value="volver">Volver</button>
+            </div>
+          </form>
+        </div>
+        {% if buscar_info %}
+          {% if tipo_dato == 'usuario' %}
+            <div class="datos">
+              <div>
+                <h3>{{nombre | upper}}</h3>
+                <div class="cuerpo">
+                  <h4>Id = {{buscar_info.id}}</h4>
+                  <h4>Perfil Metro = {{buscar_info.perfil}}</h4>
+                  <h4>Tickets Generados = {{buscar_info.cant_tickets}}</h4>
+                  <h4>Dinero en compras = ${{buscar_info.total_compras}}</h4>
+                </div>  
+              </div>
+            </div>
+          {% elif tipo_dato == 'perfil' %}  
+            <div class="datos">
+              <div>
+                <h3>{{nombre | upper}}</h3>
+                <div class="cuerpo">
+                  <h4>Precio x Ticket = ${{buscar_info.precio}}</h4>
+                  <h4>Tickets Vendidos = {{buscar_info.tickets_vendidos}}</h4>
+                  <h4>Dinero Total = ${{buscar_info.dinero_total}}</h4>
+                </div>  
+              </div>
+            </div>
+          {% endif %}  
+        {% endif %}  
+      </div>
+{% endblock %}
