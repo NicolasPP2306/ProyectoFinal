@@ -6,7 +6,9 @@ app = Flask(__name__)
 app.secret_key = b'proyecto_final'
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
 db = SQLAlchemy(app)
-app.app_context().push()
+with app.app_context():
+  db.create_all()
+
 
 class Usuario(db.Model):
   id = db.Column('id', db.Integer, primary_key = True)
