@@ -9,7 +9,6 @@ db = SQLAlchemy(app)
 with app.app_context():
   db.create_all()
 
-
 class Usuario(db.Model):
   id = db.Column('id', db.Integer, primary_key = True)
   usuario = db.Column('usuario', db.String(50))
@@ -179,7 +178,6 @@ def registro():
   else:  
     return render_template('registro.html')
 if __name__ == '__main__':
-  db.create_all()
   if Perfil.query.count() == 0:
     perfiles = [
       Perfil('ocasional', 3250) ,
