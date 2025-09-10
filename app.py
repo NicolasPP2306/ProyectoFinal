@@ -185,8 +185,8 @@ if __name__ == '__main__':
         Perfil('ocasional', 3250) ,
         Perfil('frecuente', 3100),
         Perfil('estudiante', 1500)
-      ]   
-      db.session.add_all(perfiles)
+      ]
+      db.session.add_all(perfiles)    
       db.session.commit() 
   app.run(debug = True)
 
