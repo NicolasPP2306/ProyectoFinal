@@ -1,10 +1,13 @@
 from flask import Flask, render_template, request,flash
 from flask import url_for, redirect, session
 from flask_sqlalchemy import SQLAlchemy
+import os
 
 app = Flask(__name__)
 app.secret_key = b'proyecto_final'
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{os.path.join(basedir, 'project.db')}"
 db = SQLAlchemy(app)
 
 
