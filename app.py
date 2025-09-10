@@ -180,7 +180,7 @@ def registro():
 if __name__ == '__main__':
   with app.app_context():
     db.create_all()
-  if Perfil.query.count() == 0:
+    
     perfiles = [
       Perfil('ocasional', 3250) ,
       Perfil('frecuente', 3100),
